@@ -49,7 +49,7 @@ def kakaku_check(event,context):
 
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--disable-gpu")
-    chrome_options.add_argument("--window-size=1280x1696")
+    chrome_options.add_argument("--window-size=950x1200")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--hide-scrollbars")
     chrome_options.add_argument("--enable-logging")
