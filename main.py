@@ -33,7 +33,7 @@ def kakaku_check(event,context):
     print("driver setting")
     global driver
 
-    driverPath = "/tmp" + "/chromedriver.exe" #"/tmp" + "/chromedriver"
+    driverPath = "/tmp" + "/chromedriver" #"/tmp" + "/chromedriver"
     headlessPath = "/tmp" + "/headless-chromium" #"/tmp" + "/headless-chromium"
 
     # copy and change permission
@@ -42,7 +42,7 @@ def kakaku_check(event,context):
     add_execute_permission(Path(headlessPath), "ug")
 
     print("copy chromedriver")
-    shutil.copyfile(os.getcwd() + "/chromedriver.exe", driverPath)
+    shutil.copyfile(os.getcwd() + "/chromedriver", driverPath)
     add_execute_permission(Path(driverPath), "ug")
 
     chrome_options = webdriver.ChromeOptions()
