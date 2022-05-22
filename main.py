@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.chrome import service as fs
+from selenium.common.exceptions import WebDriverException
 import time
 from discordwebhook import Discord
 import os
@@ -73,8 +74,10 @@ def kakaku_check(event,context):
     chrome_options.binary_location = headlessPath
 
     print("get driver")
-    driver = webdriver.Chrome(executable_path=driverPath, chrome_options=chrome_options)
-
+    try:
+        driver = webdriver.Chrome(executable_path=driverPath, chrome_options=chrome_options)
+    except WebDriverException:
+        driver.close()
 
 #========================================================================
 #def kakaku_check(event,context):
