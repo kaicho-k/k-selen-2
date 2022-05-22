@@ -59,7 +59,7 @@ def kakaku_check(event,context):
     chrome_options.add_argument("--ignore-certificate-errors")
     chrome_options.add_argument("--disable-dev-shm-usage")
 
-    chrome_options.add_argument("--remote-debugging-port=9222")
+    #chrome_options.add_argument("--remote-debugging-port=9222")
     chrome_options.add_argument('--data-path=/tmp/data-path')
     chrome_options.add_argument('--homedir=/tmp')
     chrome_options.add_argument('--disk-cache-dir=/tmp/cache-dir')
