@@ -1,27 +1,3 @@
-Metadata-Version: 2.0
-Name: selenium
-Version: 3.13.0
-Summary: Python bindings for Selenium
-Home-page: https://github.com/SeleniumHQ/selenium/
-Author: UNKNOWN
-Author-email: UNKNOWN
-License: Apache 2.0
-Description-Content-Type: UNKNOWN
-Platform: UNKNOWN
-Classifier: Development Status :: 5 - Production/Stable
-Classifier: Intended Audience :: Developers
-Classifier: License :: OSI Approved :: Apache Software License
-Classifier: Operating System :: POSIX
-Classifier: Operating System :: Microsoft :: Windows
-Classifier: Operating System :: MacOS :: MacOS X
-Classifier: Topic :: Software Development :: Testing
-Classifier: Topic :: Software Development :: Libraries
-Classifier: Programming Language :: Python
-Classifier: Programming Language :: Python :: 2.7
-Classifier: Programming Language :: Python :: 3.4
-Classifier: Programming Language :: Python :: 3.5
-Classifier: Programming Language :: Python :: 3.6
-
 ======================
 Selenium Client Driver
 ======================
@@ -59,7 +35,7 @@ If you have `pip <https://pip.pypa.io/>`_ on your system, you can simply install
 
     pip install -U selenium
 
-Alternately, you can download the source distribution from `PyPI <https://pypi.org/project/selenium/#files>`_ (e.g. selenium-3.13.0.tar.gz), unarchive it, and run::
+Alternately, you can download the source distribution from `PyPI <https://pypi.org/project/selenium/#files>`_ (e.g. selenium-3.14.0.tar.gz), unarchive it, and run::
 
     python setup.py install
 
@@ -124,7 +100,7 @@ Example 1:
 Example 2:
 ==========
 
-Selenium WebDriver is often used as a basis for testing web applications.  Here is a simple example uisng Python's standard `unittest <http://docs.python.org/3/library/unittest.html>`_ library:
+Selenium WebDriver is often used as a basis for testing web applications.  Here is a simple example using Python's standard `unittest <http://docs.python.org/3/library/unittest.html>`_ library:
 
 .. code-block:: python
 
@@ -151,11 +127,11 @@ For normal WebDriver scripts (non-Remote), the Java server is not needed.
 
 However, to use Selenium Webdriver Remote or the legacy Selenium API (Selenium-RC), you need to also run the Selenium server.  The server requires a Java Runtime Environment (JRE).
 
-Download the server separately, from: http://selenium-release.storage.googleapis.com/3.13/selenium-server-standalone-3.13.0.jar
+Download the server separately, from: http://selenium-release.storage.googleapis.com/3.14/selenium-server-standalone-3.14.0.jar
 
 Run the server from the command line::
 
-    java -jar selenium-server-standalone-3.13.0.jar
+    java -jar selenium-server-standalone-3.14.0.jar
 
 Then run your Python client scripts.
 
