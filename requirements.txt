@@ -1,4 +1,4 @@
-selenium >=3.14.1
+selenium >=3.13.0
 discordwebhook >=1.0.3
 BeautifulSoup4 >=4.10.0
 chromedriver-binary >=85.0.4183.87.0

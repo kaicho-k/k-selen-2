@@ -17,11 +17,17 @@
 import warnings
 
 try:
+    import http.client as http_client
+except ImportError:
+    import httplib as http_client
+
+try:
     basestring
 except NameError:  # Python 3.x
     basestring = str
 
 import shutil
+import socket
 import sys
 from contextlib import contextmanager
 
@@ -50,9 +56,8 @@ class WebDriver(RemoteWebDriver):
     def __init__(self, firefox_profile=None, firefox_binary=None,
                  timeout=30, capabilities=None, proxy=None,
                  executable_path="geckodriver", options=None,
-                 service_log_path="geckodriver.log", firefox_options=None,
-                 service_args=None, desired_capabilities=None, log_path=None,
-                 keep_alive=True):
+                 log_path="geckodriver.log", firefox_options=None,
+                 service_args=None, desired_capabilities=None):
         """Starts a new local session of Firefox.
 
         Based on the combination and specificity of the various keyword
@@ -95,23 +100,14 @@ class WebDriver(RemoteWebDriver):
             binary to use for Firefox 47.0.1 and greater, which
             defaults to picking up the binary from the system path.
         :param options: Instance of ``options.Options``.
-        :param service_log_path: Where to log information from the driver.
-        :param firefox_options: Deprecated argument for options
-        :param service_args: List of args to pass to the driver service
+        :param log_path: Where to log information from the driver.
         :param desired_capabilities: alias of capabilities. In future
             versions of this library, this will replace 'capabilities'.
             This will make the signature consistent with RemoteWebDriver.
-        :param log_path: Deprecated argument for service_log_path
-        :param keep_alive: Whether to configure remote_connection.RemoteConnection to use
-             HTTP keep-alive.
+
         """
-        if log_path:
-            warnings.warn('use service_log_path instead of log_path',
-                          DeprecationWarning, stacklevel=2)
-            service_log_path = log_path
         if firefox_options:
-            warnings.warn('use options instead of firefox_options',
-                          DeprecationWarning, stacklevel=2)
+            warnings.warn('use options instead of firefox_options', DeprecationWarning)
             options = firefox_options
         self.binary = None
         self.profile = None
@@ -160,7 +156,7 @@ class WebDriver(RemoteWebDriver):
             self.service = Service(
                 executable_path,
                 service_args=service_args,
-                log_path=service_log_path)
+                log_path=log_path)
             self.service.start()
 
             capabilities.update(options.to_capabilities())
@@ -193,7 +189,7 @@ class WebDriver(RemoteWebDriver):
                 self,
                 command_executor=executor,
                 desired_capabilities=capabilities,
-                keep_alive=keep_alive)
+                keep_alive=True)
 
         self._is_remote = False
 
@@ -201,8 +197,9 @@ class WebDriver(RemoteWebDriver):
         """Quits the driver and close every associated window."""
         try:
             RemoteWebDriver.quit(self)
-        except Exception:
-            # We don't care about the message because something probably has gone wrong
+        except (http_client.BadStatusLine, socket.error):
+            # Happens if Firefox shutsdown before we've read the response from
+            # the socket.
             pass
 
         if self.w3c:
